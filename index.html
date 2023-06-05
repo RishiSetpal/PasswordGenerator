@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <title>Generate Password Application</title>
+    <style>
+        * {
+            font-size: 50px;
+        }
+
+        body {
+            background-color: aquamarine;
+        }
+    </style>
+    <script>
+        let genratePassword = () => {
+
+            event.preventDefault();
+
+            let id6 = document.getElementById("6");
+            let id7 = document.getElementById("7");
+            let id8 = document.getElementById("8");
+            let id9 = document.getElementById("9");
+            let upperCaseAllowed = document.getElementById("isUpperCaseAllowed");
+            let specialCaseAllowed = document.getElementById("isSpecialCaseAllowed");
+            let digitsAllowed = document.getElementById("isDigitsAllowed");
+            let messsage = document.getElementById("msg");
+
+            let canContain = 'abcdefghijklmopqrstuvwxyz';
+
+            let l = 0;
+            if (id6.checked) l = 6;
+            else if (id7.checked) l = 7;
+            else if (id8.checked) l = 8;
+            else if (id9.checked) l = 9;
+
+            if (upperCaseAllowed.checked) {
+                canContain += canContain.toUpperCase();
+            }
+
+            if (specialCaseAllowed.checked) {
+                canContain += "!@#$%^&*()_+<>,./?'\";:-=`";
+            }
+
+            if (digitsAllowed.checked) {
+                canContain += "0123456789";
+            }
+
+            let password = "";
+            for (let i = 0; i < l; i++) {
+                password += canContain[parseInt(Math.random() * canContain.length)]
+            }
+            messsage.innerHTML = password;
+        }
+    </script>
+</head>
+
+<body>
+    <center>
+        <h1>Generate Password Application</h1>
+        <form onsubmit="genratePassword();">
+            <label>Select length of Password:</label> <br />
+            <input type="radio" name="leng" id="6" value="6" />6
+            <input type="radio" name="leng" id="7" value="7" checked />7
+            <input type="radio" name="leng" id="8" value="8" />8
+            <input type="radio" name="leng" id="9" value="9" />9
+            <br /><br />
+            <label>Allowed:</label> <br />
+            <input type="checkbox" name="canInclude" id="isUpperCaseAllowed"> Upper Case
+            <input type="checkbox" name="canInclude" id="isSpecialCaseAllowed"> Special Case
+            <input type="checkbox" name="canInclude" id="isDigitsAllowed"> Digits
+            <br /><br />
+            <input type="submit" value="Genrate Password">
+        </form>
+        <h1 id="msg"></h1>
+    </center>
+</body>
+
+</html>
